@@ -7,6 +7,10 @@ const ItemSchema = new Schema({
         type: String,
         required: true
     },
+    contact: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now
@@ -14,3 +18,4 @@ const ItemSchema = new Schema({
 });
 
 module.exports = Item = mongoose.model('item', ItemSchema);
+

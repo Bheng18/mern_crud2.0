@@ -4,6 +4,7 @@ import ShoppingList from './components/ShoppingList';
 import { Provider } from 'react-redux';
 import store from './store';
 import ItemModal from './components/itemModal';
+import EditItem from './components/editItem';
 import { Container } from 'reactstrap';
 //import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';

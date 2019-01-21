@@ -7,6 +7,7 @@ const items = require('./routes/api/items');
 const app = express();
 
 //body parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //DB config

@@ -18,9 +18,10 @@ router.get('/', (req, res) => {
 //@access Public
 router.post('/', (req, res) => {
     const newItem = new Item({
-      name: req.body.name
+      name: req.body.name,
+      contact: req.body.contact 
     });
-    newItem.save().then(item => res.json(item));
+    newItem.save().then(item => res.json(item));         
  });
 
 //@routes DELETE api/items/:id
@@ -31,5 +32,16 @@ router.delete('/:id', (req, res) => {
     .then(item => item.remove().then(()=>res.json({ success: true})))
     .catch(err => res.status(404).json({ success: false }));
 });
+
+//@routes Update api/items/:id
+//@desc   Update Item
+//@access Public
+router.put('/:id', (req, res) => {
+    Item.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, (err, task) => {
+      if (err)
+        res.send(err);
+      res.json(task);
+    });
+  });
 
  module.exports = router;
