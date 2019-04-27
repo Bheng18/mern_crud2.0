@@ -38,7 +38,6 @@ class App extends Component {
       <Router>
         <Provider store={store}>
           <div className="App">
-         
             <AppNavbar />
               <Container>
                 <ItemModal />
