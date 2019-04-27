@@ -12,13 +12,20 @@ import {
     FormText
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { editItem } from '../actions/itemAction';
+import { selectedItem, editItem } from '../actions/itemAction';
+import { Paths } from '../enums'
 //import uuid from 'uuid';
 
 class EditItem extends Component{
     state = {
-        modal: false,
-        name: ''
+        modal: true,
+        _id: this.props.item._id,
+        name: this.props.item.name,
+        contact: this.props.item.contact
+    }
+
+    componentDidMount(){
+        console.log('comDidMount',this.props.item);
     }
 
     toggle = () => {
@@ -29,26 +36,28 @@ class EditItem extends Component{
 
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
+        console.log('name: ', this.state.name)
     }
 
     onSubmit = (e) => {
        e.preventDefault();
        const newItem = {
-          // id: uuid(),
-           name: this.state.name // = this.setState({ [e.target.name]: e.target.value })
-       }
-     //add item via add item
-       this.props.editItem(newItem);
-
-     //close modal
-     this.toggle();
-
+           _id: this.state._id,
+           name: this.state.name, // = this.setState({ [e.target.name]: e.target.value })
+           contact: this.state.contact
+        }
+      this.props.editItem(newItem); //execute edit item
+    //   this.props.history.push('/'); same as below, also working
+      this.props.history.push(Paths.ITEMS);
+      this.toggle(); //close modal
     }
 
     render(){
+        // const items = this.state.item;
+    console.log('item', this.props);
         return(
            <div>
-               <Button color="dark" style={{marginBottom: '2rem'}} onClick={this.toggle}>Edit Item</Button>
+               {/* <Button color="dark" style={{marginBottom: '2rem'}} onClick={this.toggle}>Edit Item</Button> */}
                
                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                 <ModalHeader toggle={this.toggle}>Shopping Item</ModalHeader>
@@ -56,7 +65,8 @@ class EditItem extends Component{
                       <Form onSubmit={this.onSubmit}>
                            <FormGroup>
                                <Label for="ïtem">Item</Label>
-                               <Input type="text" name="name" id="ïtem" onChange={this.onChange} />
+                               <Input type="text" name="name" value={this.state.name} id="ïtem" onChange={this.onChange} />
+                               <Input type="text" name="contact" value={this.state.contact} id="ïtem" onChange={this.onChange} />
                                <Button color="dark" style={{marginTop: '2rem'}} block >Submit</Button>
                                <Button color="warning" onClick={this.toggle} block >Cancel</Button>
                            </FormGroup>
@@ -75,7 +85,7 @@ class EditItem extends Component{
 }//end of class
 
 const mapStateToProps = state => ({
-   item: state.item
+   item: state.item.selectedItem
 });
 
-export default connect(mapStateToProps, { editItem })(EditItem); 
+export default connect(mapStateToProps, { selectedItem, editItem })(EditItem); 

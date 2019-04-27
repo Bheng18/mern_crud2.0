@@ -3,7 +3,8 @@ import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, EDIT_ITEM, ITEMS_LOADING } from '../a
 
 const initialState = {
     items: [],
-    loading: false
+    loading: false,
+    selectedItem: null
 }
 
 export default function(state = initialState, action){
@@ -23,7 +24,7 @@ export default function(state = initialState, action){
        case EDIT_ITEM:
           return {
               ...state,
-              items: state.items.filter(item => item._id !== action.payload)
+              selectedItem: action.payload
           };
        
        case ADD_ITEM:

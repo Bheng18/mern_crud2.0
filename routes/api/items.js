@@ -36,8 +36,8 @@ router.delete('/:id', (req, res) => {
 //@routes Update api/items/:id
 //@desc   Update Item
 //@access Public
-router.put('/:id', (req, res) => {
-    Item.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, (err, task) => {
+router.put('/', (req, res) => {
+    Item.findOneAndUpdate({_id: req.body._id}, { $set: { name: req.body.name, contact: req.body.contact }}, {new: true}, (err, task) => {
       if (err)
         res.send(err);
       res.json(task);
