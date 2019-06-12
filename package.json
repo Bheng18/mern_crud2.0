@@ -8,7 +8,8 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client-react": "npm start --prefix client-react",
-    "dev": "concurrently \"npm run server\" \"npm run client-react\""
+    "dev": "concurrently \"npm run server\" \"npm run client-react\"",
+    "heroku-postbuild": "cd client-react && npm install && npm run build"
   },
   "author": "benjoe",
   "license": "MIT",
