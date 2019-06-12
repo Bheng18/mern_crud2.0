@@ -42,7 +42,7 @@ class App extends Component {
               <Container>
                 <ItemModal />
                   <Switch> 
-                    <Route exact path="/" component={ShoppingList} />
+                    <Route exact path="/itemList" component={ShoppingList} />
                     {/* <Route exact path="/editItem" component={EditItem} /> */}
                     <Route
                         exact
