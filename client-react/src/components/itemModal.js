@@ -46,6 +46,7 @@ class ItemModal extends Component{
        }
      //add item via add item
        this.props.addItem(newItem);
+       this.props.history.push('/itemList');
 
      //close modal
      this.toggle();
