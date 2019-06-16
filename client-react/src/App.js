@@ -42,8 +42,14 @@ class App extends Component {
               <Container>
                 <ItemModal />
                   <Switch> 
-                    <Route exact path="/itemList" component={ShoppingList} />
-                    {/* <Route exact path="/editItem" component={EditItem} /> */}
+                    {/* <Route exact path="/itemList" component={ShoppingList} /> */}
+                    <Route 
+                        exact 
+                        path={Paths.ITEMS} 
+                        component={lazyLoad(() =>
+                          import("./components/ShoppingList")
+                        )} 
+                    />
                     <Route
                         exact
                         path={Paths.EDIT_ITEM}

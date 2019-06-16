@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import {
     Button, 
     Modal, 
@@ -13,13 +14,18 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemAction';
+import { Paths } from '../enums'
 //import uuid from 'uuid';
 
 class ItemModal extends Component{
     state = {
         modal: false,
         name: '',
-        contact: ''
+        contact: '',
+    }
+
+    componentDidMount(){
+        console.log('comDidMount',this.props.item);
     }
 
     toggle = () => {
@@ -28,29 +34,26 @@ class ItemModal extends Component{
         });
     }
 
-    onChangeName = (e) => {
-      //  this.setState({ [e.target.name]: e.target.value }); //first encounter problem this code
-        this.setState({ name: e.target.value });
+    onChange = (e) => {
+       this.setState({ [e.target.name]: e.target.value }); //first encounter problem this code
+        // this.setState({ name: e.target.value });
+        console.log('items', this.state.name)
     }
 
-    onChangeContact = (e) => {
-        this.setState({contact: e.target.value });
-    }
+    // onChangeContact = (e) => {
+    //     this.setState({contact: e.target.value });
+    // }
 
     onSubmit = (e) => {
        e.preventDefault();
        const newItem = {
-          // id: uuid(),
            name: this.state.name,
            contact: this.state.contact
        }
      //add item via add item
        this.props.addItem(newItem);
-       this.props.history.push('/itemList');
-
-     //close modal
-     this.toggle();
-
+       this.props.history.push(Paths.ITEMS); // tagal ko dito, withRouter lang pala need nito
+       this.toggle(); //close modal
     }
 
     render(){
@@ -67,16 +70,16 @@ class ItemModal extends Component{
                                <Input 
                                   type="text"
                                   name="name"
-                                  id="ïtem"
+                                  id="name"
                                   placeholder="Add Shopping Item here"
-                                  onChange={this.onChangeName}
+                                  onChange={this.onChange}
                                />
                                <Input 
                                   type="text"
                                   name="contact"
                                   id="contact"
                                   placeholder="Add contact Item here"
-                                  onChange={this.onChangeContact}
+                                  onChange={this.onChange}
                                />
                                <Button
                                    color="dark"
@@ -102,4 +105,4 @@ const mapStateToProps = state => ({
    item: state.item
 });
 
-export default connect(mapStateToProps, { addItem })(ItemModal); 
+export default connect(mapStateToProps, { addItem })(withRouter(ItemModal)); 

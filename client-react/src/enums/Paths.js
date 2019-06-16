@@ -37,7 +37,7 @@ const Paths = {
   DELETE_SEGMENTS: `${basePath}/segments/delete`,
 
   //items
-  ITEMS: `/`,
+  ITEMS: `${basePath}/itemList`,
   EDIT_ITEM: `${basePath}/item/edit`
 };
 

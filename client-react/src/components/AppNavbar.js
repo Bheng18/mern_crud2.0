@@ -12,6 +12,7 @@ import {
         DropdownMenu,
         DropdownItem 
 } from 'reactstrap';
+import { Paths } from '../enums'
 
 class AppNavbar extends Component{
     state = {
@@ -28,15 +29,15 @@ class AppNavbar extends Component{
      return(
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Home</NavbarBrand>
+          <NavbarBrand href={Paths.ITEMS}>Home</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/itemList">Items</NavLink>
+                <NavLink href={Paths.ITEMS}>Items</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                <NavLink href="https://github.com/Bheng18/MERN-CRUD" target="_blank">GitHub</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
