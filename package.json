@@ -9,7 +9,7 @@
     "server": "nodemon server.js",
     "client-react": "npm start --prefix client-react",
     "dev": "concurrently \"npm run server\" \"npm run client-react\"",
-    "heroku-postbuild": "cd client-react && npm install && npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client-react && npm run build --prefix client-react"
   },
   "author": "benjoe",
   "license": "MIT",
