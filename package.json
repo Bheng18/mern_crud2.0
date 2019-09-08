@@ -6,7 +6,7 @@
   "scripts": {
     "client-install": "npm install --prefix client-react",
     "start": "node server.js",
-    "server": "nodemon server.js",
+    "server": "nodemon server.js --ignore client-react",
     "client-react": "npm start --prefix client-react",
     "dev": "concurrently \"npm run server\" \"npm run client-react\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client-react && npm run build --prefix client-react"

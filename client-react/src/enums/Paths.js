@@ -38,7 +38,8 @@ const Paths = {
 
   //items
   ITEMS: `${basePath}/itemList`,
-  EDIT_ITEM: `${basePath}/item/edit`
+  EDIT_ITEM: `${basePath}/item/edit`,
+  ITEM_DETAILS: `${basePath}/item/details`,
 };
 
 export default Paths;

@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button, Table } from 'reactstrap';
+// import { Container, ListGroup, ListGroupItem, Button, Table } from 'reactstrap';
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //import uuid from 'uuid';
 import { connect } from 'react-redux';
 import { getItems, deleteItem, editItem, selectedItem } from '../actions/itemAction';
 import { PropTypes } from 'prop-types';
-import { Paths } from '../enums'
+import { Paths } from '../enums';
+import ListRow from './ListRow';
+import ItemModal from './itemModal';
+// import ListDetails from './ListDetails';
+// import ListRowHeader from './ListRowHeader';
+
+// import Paper from '@material-ui/core/Paper';
+// import Grid from '@material-ui/core/Grid';
+// import styled from 'styled-components';
+
+// const Div = styled.div`
+//    color: blue;
+// `
 
 class ShoppingList extends Component{
-
     componentDidMount(){
         this.props.getItems();
+        // console.log(this.props.item)
     }
     
     onEditClick = (item) => {
@@ -18,41 +30,48 @@ class ShoppingList extends Component{
        this.props.history.push(Paths.EDIT_ITEM);
     }
 
+    onSelectItem = (item) => {
+      this.props.selectedItem(item);
+      this.props.history.push(Paths.ITEM_DETAILS);
+      console.log('Items:', item)
+    }
+
     onDeleteClick = (id) => {
        this.props.deleteItem(id);
     }
      
     render(){
-        const { items } = this.props.item;
+        const { items } = this.props.items;
+        // console.log(items)
         return(
-           <Container >
-           
-<Table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Contact</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-        {items.map((item, index) => (
-          <tr key={index} timeout={500} >
-          
-            <th scope="row">{index}</th>
-            <td>{item.name}</td>
-            <td>{item.contact}</td>
-            <td><Button className="edit-btn float-right" color="primary" size="sm" 
-                              onClick={this.onEditClick.bind(this, item)}>Edit</Button>
-                <Button className="remove-btn float-right" color="danger" size="sm" 
-                              onClick={this.onDeleteClick.bind(this, item._id)}>Delete</Button></td>
-          
-            </tr>
-              ))}
-        </tbody>
-      </Table>
-           </Container>
+           <div >
+             {/* <Contaciner> */}
+              {/* <ListRowHeader /> */}
+              <ItemModal />
+              <div>
+                {
+                  // items ?
+                  // items.length > 0 ?
+                    items.map((item, index) => {
+                      return (
+                        // <div key={index} onClick={() => this.onSelectItem(item)} > //its working
+                          <ListRow
+                            // onClick={() => this.onSelectItem(item)}
+                            key={index}
+                            index={index}
+                            item={item}
+                            onEdit={() => this.onEditClick(item)}
+                            onDelete={() => this.onDeleteClick(item._id)}
+                          />
+                        // </div>
+                      )
+                    })
+                    // : console.log('no data')
+                    // : <ListLoading message={"No transactions found."} />
+                  // : <ListLoading />
+                }
+              </div>
+           </div>
         );
 
     }
@@ -61,11 +80,11 @@ class ShoppingList extends Component{
 
 ShoppingList.propTypes = {
     getItems: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired
+    items: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-   item: state.item
+   items: state.item
 });
 
 

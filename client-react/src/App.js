@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AppNavbar from './components/AppNavbar';
-import ShoppingList from './components/ShoppingList';
+// import ShoppingList from './components/ShoppingList';
 import { Provider } from 'react-redux';
 import store from './store';
-import ItemModal from './components/itemModal';
-import EditItem from './components/editItem';
+// import EditItem from './components/editItem';
 import { Container } from 'reactstrap';
 import { Paths } from './enums';
 import Loadable from "react-loadable";
@@ -40,7 +39,6 @@ class App extends Component {
           <div className="App">
             <AppNavbar />
               <Container>
-                <ItemModal />
                   <Switch> 
                     {/* <Route exact path="/itemList" component={ShoppingList} /> */}
                     <Route 
@@ -57,6 +55,13 @@ class App extends Component {
                           import("./components/editItem")
                         )}
                       />
+                    <Route 
+                        exact
+                        path={Paths.ITEM_DETAILS}
+                        component={lazyLoad(() =>
+                          import("./components/ListDetails")
+                        )}
+                    />
                   </Switch>  
               </Container>
           </div>

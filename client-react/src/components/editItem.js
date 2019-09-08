@@ -4,16 +4,17 @@ import {
     Modal, 
     ModalHeader,
     ModalBody, 
-    ModalFooter,
+    // ModalFooter,
     Form, 
     FormGroup, 
     Label, 
     Input, 
-    FormText
+    // FormText
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { selectedItem, editItem } from '../actions/itemAction';
 import { Paths } from '../enums'
+// import { Divider } from '@material-ui/core';
 //import uuid from 'uuid';
 
 class EditItem extends Component{
@@ -66,6 +67,8 @@ class EditItem extends Component{
                            <FormGroup>
                                <Label for="ïtem">Item</Label>
                                <Input type="text" name="name" value={this.state.name} id="ïtem" onChange={this.onChange} />
+                               {/* <Divider /> */}
+                                <br />
                                <Input type="text" name="contact" value={this.state.contact} id="ïtem" onChange={this.onChange} />
                                <Button color="dark" style={{marginTop: '2rem'}} block >Submit</Button>
                                <Button color="warning" onClick={this.toggle} block >Cancel</Button>

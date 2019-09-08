@@ -5,12 +5,12 @@ import {
     Modal, 
     ModalHeader,
     ModalBody, 
-    ModalFooter,
+    // ModalFooter,
     Form, 
     FormGroup, 
     Label, 
     Input, 
-    FormText
+    // FormText
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemAction';
@@ -25,7 +25,7 @@ class ItemModal extends Component{
     }
 
     componentDidMount(){
-        console.log('comDidMount',this.props.item);
+        console.log('comDidMount item modal',this.props.item);
     }
 
     toggle = () => {
@@ -52,7 +52,7 @@ class ItemModal extends Component{
        }
      //add item via add item
        this.props.addItem(newItem);
-       this.props.history.push(Paths.ITEMS); // tagal ko dito, withRouter lang pala need nito
+       this.props.history.push(Paths.ITEM); // tagal ko dito, withRouter lang pala need nito
        this.toggle(); //close modal
     }
 
@@ -74,6 +74,7 @@ class ItemModal extends Component{
                                   placeholder="Add Shopping Item here"
                                   onChange={this.onChange}
                                />
+                               <br />
                                <Input 
                                   type="text"
                                   name="contact"
