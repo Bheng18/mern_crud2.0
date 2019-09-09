@@ -1,94 +1,98 @@
-import React, { Component } from 'react';
-import {
-    Button, 
-    Modal, 
-    ModalHeader,
-    ModalBody, 
-    // ModalFooter,
-    Form, 
-    FormGroup, 
-    Label, 
-    Input, 
-    // FormText
-} from 'reactstrap';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import AddIcon from '@material-ui/icons/Add';
+import { Paths } from '../enums';
 import { selectedItem, editItem } from '../actions/itemAction';
-import { Paths } from '../enums'
-// import { Divider } from '@material-ui/core';
-//import uuid from 'uuid';
 
-class EditItem extends Component{
-    state = {
-        modal: true,
-        _id: this.props.item._id,
-        name: this.props.item.name,
-        contact: this.props.item.contact
-    }
+function EditItem(props) {
+  const [open, setOpen] = React.useState(true);
+  const [values, setValues] = useState({
+      _id: props.item._id,
+      name: props.item.name,
+      contact: String(props.item.contact),
+  });
 
-    componentDidMount(){
-        console.log('comDidMount',this.props.item);
-    }
+//   function handleClickOpen() {
+//     setOpen(true);
+//   }
 
-    toggle = () => {
-        this.setState({
-            modal: !this.state.modal
-        });
-    }
+  function handleClose() {
+    setOpen(false);
+    props.history.push(Paths.ITEMS);
+  }
 
-    onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-        console.log('name: ', this.state.name)
-    }
+//   function onChange(e) {
+//     setValues({ [e.target.id]: e.target.values }); 
+//      console.log('items values: ', values)
+//   }
 
-    onSubmit = (e) => {
-       e.preventDefault();
-       const newItem = {
-           _id: this.state._id,
-           name: this.state.name, // = this.setState({ [e.target.name]: e.target.value })
-           contact: this.state.contact
-        }
-      this.props.editItem(newItem); //execute edit item
-    //   this.props.history.push('/'); same as below, also working
-      this.props.history.push(Paths.ITEMS);
-      this.toggle(); //close modal
-    }
+  const handleChange = name => event => {
+    setValues({ ...values, [name]: event.target.value });
+     console.log('handleChange', name)
+  };
 
-    render(){
-        // const items = this.state.item;
-    console.log('item', this.props);
-        return(
-           <div>
-               {/* <Button color="dark" style={{marginBottom: '2rem'}} onClick={this.toggle}>Edit Item</Button> */}
-               
-               <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                <ModalHeader toggle={this.toggle}>Shopping Item</ModalHeader>
-                <ModalBody>
-                      <Form onSubmit={this.onSubmit}>
-                           <FormGroup>
-                               <Label for="ïtem">Item</Label>
-                               <Input type="text" name="name" value={this.state.name} id="ïtem" onChange={this.onChange} />
-                               {/* <Divider /> */}
-                                <br />
-                               <Input type="text" name="contact" value={this.state.contact} id="ïtem" onChange={this.onChange} />
-                               <Button color="dark" style={{marginTop: '2rem'}} block >Submit</Button>
-                               <Button color="warning" onClick={this.toggle} block >Cancel</Button>
-                           </FormGroup>
-                      </Form>
-                </ModalBody>
-                { /*<ModalFooter>
-                    <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                </ModalFooter> */ }
-                </Modal>
 
-           </div>
-        );
-    }
+  function onSubmit(e){
+    e.preventDefault();
+    console.log('submit form:', values)
+  //edit item via editItem method from redux
+    props.editItem(values);
+    props.history.push(Paths.ITEM);
+    handleClose(); //close modal
+ }
 
-}//end of class
+  return (
+    <div><br />
+      <form noValidate autoComplete="off">
+      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+         <AddIcon /> Add Employee
+      </Button> */}
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Update Employee</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter your valid name and contact number here. We will send updates occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="LastName, FirstName"
+            type="text"
+            value={values.name}
+            onChange={handleChange('name')}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            id="contact"
+            label="Contact no."
+            type="text"
+            value={values.contact}
+            onChange={handleChange('contact')}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">Cancel</Button>
+          <Button onClick={onSubmit} color="primary">Save</Button>
+        </DialogActions>
+      </Dialog>
+      </form>
+    </div>
+  );
+}
 
 const mapStateToProps = state => ({
-   item: state.item.selectedItem
-});
-
-export default connect(mapStateToProps, { selectedItem, editItem })(EditItem); 
+    item: state.item.selectedItem
+ });
+ 
+ export default connect(mapStateToProps, { editItem })(withRouter(EditItem)); 

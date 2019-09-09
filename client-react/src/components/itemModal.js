@@ -1,109 +1,104 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router';
-import {
-    Button, 
-    Modal, 
-    ModalHeader,
-    ModalBody, 
-    // ModalFooter,
-    Form, 
-    FormGroup, 
-    Label, 
-    Input, 
-    // FormText
-} from 'reactstrap';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import AddIcon from '@material-ui/icons/Add';
+import { Paths } from '../enums';
 import { addItem } from '../actions/itemAction';
-import { Paths } from '../enums'
-//import uuid from 'uuid';
 
-class ItemModal extends Component{
-    state = {
-        modal: false,
-        name: '',
-        contact: '',
+function ItemModal(props) {
+  const [open, setOpen] = React.useState(false);
+  const [values, setValues] = useState({
+      name: '',
+      contact: '',
+  });
+
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
+
+//   function onChange(e) {
+//     setValues({ [e.target.id]: e.target.values }); 
+//      console.log('items values: ', values)
+//   }
+
+  const handleChange = name => event => {
+    setValues({ ...values, [name]: event.target.value });
+    // console.log('handleChange', name)
+  };
+
+
+  function onSubmit(e){
+    e.preventDefault();
+    const newItem = {
+        name: values.name,
+        contact: values.contact
     }
+    console.log('submit form:', newItem)
+  //add item via add item
+    props.addItem(newItem);
+    props.history.push(Paths.ITEM);
+    handleClose(); //close modal
+ }
 
-    componentDidMount(){
-        console.log('comDidMount item modal',this.props.item);
-    }
-
-    toggle = () => {
-        this.setState({
-            modal: !this.state.modal
-        });
-    }
-
-    onChange = (e) => {
-       this.setState({ [e.target.name]: e.target.value }); //first encounter problem this code
-        // this.setState({ name: e.target.value });
-        console.log('items', this.state.name)
-    }
-
-    // onChangeContact = (e) => {
-    //     this.setState({contact: e.target.value });
-    // }
-
-    onSubmit = (e) => {
-       e.preventDefault();
-       const newItem = {
-           name: this.state.name,
-           contact: this.state.contact
-       }
-     //add item via add item
-       this.props.addItem(newItem);
-       this.props.history.push(Paths.ITEM); // tagal ko dito, withRouter lang pala need nito
-       this.toggle(); //close modal
-    }
-
-    render(){
-        return(
-           <div>
-               <Button color="dark" style={{marginBottom: '2rem'}} onClick={this.toggle}>Add Item</Button>
-               
-               <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                <ModalHeader toggle={this.toggle}>Shopping Item</ModalHeader>
-                <ModalBody>
-                      <Form onSubmit={this.onSubmit}>
-                           <FormGroup>
-                               <Label for="ïtem">Item</Label>
-                               <Input 
-                                  type="text"
-                                  name="name"
-                                  id="name"
-                                  placeholder="Add Shopping Item here"
-                                  onChange={this.onChange}
-                               />
-                               <br />
-                               <Input 
-                                  type="text"
-                                  name="contact"
-                                  id="contact"
-                                  placeholder="Add contact Item here"
-                                  onChange={this.onChange}
-                               />
-                               <Button
-                                   color="dark"
-                                   style={{marginTop: '2rem'}} block
-                               >Submit</Button>
-                               <Button color="warning" onClick={this.toggle} block >Cancel</Button>
-                           </FormGroup>
-                      </Form>
-                </ModalBody>
-                { /*<ModalFooter>
-                    <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                </ModalFooter> */ }
-                </Modal>
-
-           </div>
-        );
-    }
-
-}//end of class
+  return (
+    <div><br />
+      <form noValidate autoComplete="off">
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+         <AddIcon /> Add Employee
+      </Button>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Add Employee</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter your valid name and contact number here. We will send updates occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="LastName, FirstName"
+            type="text"
+            value={values.name}
+            onChange={handleChange('name')}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            id="contact"
+            label="Contact no."
+            type="number"
+            value={values.contact}
+            onChange={handleChange('contact')}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={onSubmit} color="primary">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+      </form>
+    </div>
+  );
+}
 
 const mapStateToProps = state => ({
-   item: state.item
-});
-
-export default connect(mapStateToProps, { addItem })(withRouter(ItemModal)); 
+    item: state.item
+ });
+ 
+ export default connect(mapStateToProps, { addItem })(withRouter(ItemModal)); 
