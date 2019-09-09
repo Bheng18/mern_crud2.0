@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 // import { NavigationMoreVert, EditorModeEdit, ContentRemove } from 'material-ui/icons';
@@ -86,9 +88,9 @@ const useStyles = makeStyles(theme => ({
                 onClose={handleClose}
               >
                 {/* <MenuItem onClick={this.onEditClick.bind(this, item)}>Edit</MenuItem> */}
-                <MenuItem onClick={props.onEdit ? props.onEdit.bind(this) : ''}>Edit</MenuItem>
+                <MenuItem onClick={props.onEdit ? props.onEdit.bind(this) : ''}><EditIcon /> Edit</MenuItem>
                 {/* <MenuItem onClick={props.onViewDetails ? props.onViewDetails.bind(this) : ''}>Details</MenuItem> */}
-                <MenuItem onClick={props.onDelete ? props.onDelete.bind(this) : ''}>Delete</MenuItem>
+                <MenuItem onClick={props.onDelete ? props.onDelete.bind(this) : ''}><DeleteIcon /> Delete</MenuItem>
               </Menu>
             </Grid>
 

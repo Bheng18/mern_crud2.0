@@ -23,6 +23,12 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     margin: theme.spacing(1),
+    '&:hover': {
+      textDecoration: 'none',
+      color: fade(theme.palette.common.white, 0.75),
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+      borderRadius: theme.shape.borderRadius,
+    },
   },
   menuButton: {
     marginRight: theme.spacing(2),

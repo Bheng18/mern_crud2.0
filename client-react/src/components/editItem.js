@@ -8,7 +8,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import AddIcon from '@material-ui/icons/Add';
+import SaveIcon from '@material-ui/icons/Save';
+import CancelIcon from '@material-ui/icons/Cancel';
 import { Paths } from '../enums';
 import { selectedItem, editItem } from '../actions/itemAction';
 
@@ -82,8 +83,8 @@ function EditItem(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">Cancel</Button>
-          <Button onClick={onSubmit} color="primary">Save</Button>
+          <Button onClick={handleClose} color="primary"><CancelIcon /> Cancel</Button>
+          <Button onClick={onSubmit} color="primary"><SaveIcon /> Save</Button>
         </DialogActions>
       </Dialog>
       </form>

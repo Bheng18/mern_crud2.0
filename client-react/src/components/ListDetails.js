@@ -9,6 +9,8 @@ import { PropTypes } from 'prop-types';
 import moment from 'moment';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Paths } from '../enums';
@@ -120,8 +122,8 @@ const ListDetails = (props) => {
                 open={Boolean(anchorEl)}  
                 onClose={handleClose} 
               > 
-                <MenuItem onClick={() => onEditClick(props.item)} >Edit</MenuItem>
-                <MenuItem onClick={() => onDeleteClick(props.item._id)} >Delete</MenuItem>
+                <MenuItem onClick={() => onEditClick(props.item)} color="inherit" ><EditIcon color="primary"/> Edit</MenuItem>
+                <MenuItem onClick={() => onDeleteClick(props.item._id)} ><DeleteIcon color="primary"/> Delete</MenuItem>
               </Menu>
 
             </Grid>
