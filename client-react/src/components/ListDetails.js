@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Paths } from '../enums';
 // import ButtonBase from '@material-ui/core/ButtonBase';
 // import { NavigationMoreVert, EditorModeEdit, ContentRemove } from 'material-ui/icons';
 // import { Divider } from '@material-ui/core';
@@ -39,11 +40,11 @@ const useStyles = makeStyles(theme => ({
   // },
 }));
 
-const ListDetails = ({item}) => {
+const ListDetails = (props) => {
   const classes = useStyles();
 
-// const [items, setItems] = useState(item);
-// console.log('light', item)
+// const [id, setOnDelete] = useState({item});
+// console.log('light', props)
 
 // useEffect(() => {
 //   console.log('It Works', props);
@@ -57,7 +58,19 @@ const ListDetails = ({item}) => {
     setAnchorEl(null);
   }
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+  function onEditClick(item){
+    props.selectedItem(item);
+    props.history.push(Paths.EDIT_ITEM);
+    // console.log('edit item:', item)
+  }
+
+  function onDeleteClick(id){
+     props.deleteItem(id);
+    // console.log('id', id)
+    props.history.push(Paths.ITEMS);
+  }
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   return (
     <div className={classes.root}>
@@ -72,17 +85,17 @@ const ListDetails = ({item}) => {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography variant="caption" display="block">Date:</Typography> 
-                <Typography variant="button" gutterBottom><b>{moment(item.date).format('MMM. DD, YYYY')}</b></Typography>
+                <Typography variant="button" gutterBottom><b>{moment(props.item.date).format('MMM. DD, YYYY')}</b></Typography>
               </Grid>
 
               <Grid item xs>
                 <Typography variant="caption" display="block">name:</Typography> 
-                <Typography variant="button" gutterBottom><b>{item.name}</b></Typography>
+                <Typography variant="button" gutterBottom><b>{props.item.name}</b></Typography>
               </Grid>
 
               <Grid item xs>
                 <Typography variant="caption" display="block">Contact:</Typography> 
-                <Typography variant="button" gutterBottom><b>{'(+' + item.contact.replace(/(\d{2})(\d{3})(\d{3})/, '$1) $2-$3-')}</b></Typography>
+                <Typography variant="button" gutterBottom><b>{'(+' + props.item.contact.replace(/(\d{2})(\d{3})(\d{3})/, '$1) $2-$3-')}</b></Typography>
               </Grid>
               
               {/* <Grid item> 
@@ -107,12 +120,8 @@ const ListDetails = ({item}) => {
                 open={Boolean(anchorEl)}  
                 onClose={handleClose} 
               > 
-                <MenuItem 
-                    // onClick={onEdit ? onEdit.bind(this) : ''}
-                    >Edit</MenuItem>
-                <MenuItem 
-                    // onClick={onDelete ? onDelete.bind(this) : ''}
-                    >Delete</MenuItem>
+                <MenuItem onClick={() => onEditClick(props.item)} >Edit</MenuItem>
+                <MenuItem onClick={() => onDeleteClick(props.item._id)} >Delete</MenuItem>
               </Menu>
 
             </Grid>

@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   
   return (
     // onClick={props.onClick.bind(props)}
-    <div className={classes.root} >
+    <div className={classes.root} onClick={props.onClick.bind(props)} >
       <Grid container spacing={2}>
         <Grid item xs={12}>
         <Paper className={classes.paper}>

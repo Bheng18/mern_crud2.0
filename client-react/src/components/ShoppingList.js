@@ -56,7 +56,7 @@ class ShoppingList extends Component{
                       return (
                         // <div key={index} onClick={() => this.onSelectItem(item)} > //its working
                           <ListRow
-                            // onClick={() => this.onSelectItem(item)}
+                            onClick={() => this.onSelectItem(item)}
                             key={index}
                             index={index}
                             item={item}
