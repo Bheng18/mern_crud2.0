@@ -7,10 +7,12 @@ import Typography from '@material-ui/core/Typography';
 import { getItems, deleteItem, editItem, selectedItem } from '../actions/itemAction';
 import { PropTypes } from 'prop-types';
 import moment from 'moment';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Paths } from '../enums';
@@ -72,10 +74,23 @@ const ListDetails = (props) => {
     props.history.push(Paths.ITEMS);
   }
 
+  function handleBackClick(){
+    props.history.push(Paths.ITEMS);
+  }
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root}><br />
+       <Grid 
+          container
+          direction="row"
+          justify="flex-end"
+          alignItems="flex-end" >
+          <Button variant="outlined" color="primary" onClick={handleBackClick} >
+            <ArrowBackIcon /> Back
+          </Button>
+       </Grid>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           {/* <Grid item>
