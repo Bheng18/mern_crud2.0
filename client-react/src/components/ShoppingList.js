@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-// import { Container, ListGroup, ListGroupItem, Button, Table } from 'reactstrap';
-// import { CSSTransition, TransitionGroup } from 'react-transition-group';
-//import uuid from 'uuid';
 import { connect } from 'react-redux';
 import { getItems, deleteItem, editItem, selectedItem } from '../actions/itemAction';
 import { PropTypes } from 'prop-types';
@@ -36,8 +33,10 @@ class ShoppingList extends Component{
       console.log('Items:', item)
     }
 
-    onDeleteClick = (id) => {
-       this.props.deleteItem(id);
+    onDeleteClick = (item) => {
+      //  this.props.deleteItem(item);
+      this.props.selectedItem(item);
+      this.props.history.push(Paths.ITEM_CONFIRM);
     }
      
     render(){
@@ -48,6 +47,7 @@ class ShoppingList extends Component{
              {/* <Contaciner> */}
               {/* <ListRowHeader /> */}
               <ItemModal />
+              
               <div>
                 {
                   // items ?
@@ -61,7 +61,7 @@ class ShoppingList extends Component{
                             index={index}
                             item={item}
                             onEdit={() => this.onEditClick(item)}
-                            onDelete={() => this.onDeleteClick(item._id)}
+                            onDelete={() => this.onDeleteClick(item)}
                             onViewDetails={() => this.onSelectItem(item)}
                           />
                         // </div>

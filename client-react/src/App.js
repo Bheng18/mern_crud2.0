@@ -62,6 +62,13 @@ class App extends Component {
                           import("./components/ListDetails")
                         )}
                     />
+                    <Route 
+                        exact
+                        path={Paths.ITEM_CONFIRM}
+                        component={lazyLoad(() =>
+                          import("./components/ConfirmDelete")
+                        )}
+                    />
                   </Switch>  
               </Container>
           </div>

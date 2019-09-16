@@ -40,6 +40,7 @@ const Paths = {
   ITEMS: `${basePath}/itemList`,
   EDIT_ITEM: `${basePath}/item/edit`,
   ITEM_DETAILS: `${basePath}/item/details`,
+  ITEM_CONFIRM: `${basePath}/item/confirm`,
 };
 
 export default Paths;

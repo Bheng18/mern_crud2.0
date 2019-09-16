@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+// import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
@@ -16,6 +16,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import { Paths } from '../enums';
 import { addItem } from '../actions/itemAction';
 import Message from './Message';
+// import Snackbar from '@material-ui/core/Snackbar';
 
 // import FileUpload from './fileUpload';
 // import DropzoneAreaExample from './fileUploadDrop';
@@ -68,6 +69,8 @@ function ItemModal(props) { //main function
 
   function handleClose() {
     setOpen(false);
+    setPreview(undefined) // to remove preview image
+    setMessage(''); //set message to null
   }
 
   const handleChange = name => event => {
@@ -84,6 +87,7 @@ function ItemModal(props) { //main function
     console.log('filez: ', e.target.files[0].name)
     // I've kept this example simple by using the first image instead of multiple
     setSelectedFile(e.target.files[0]);
+    setMessage(''); // set the message to null
 }
 
   function onSubmit(e){
@@ -99,6 +103,9 @@ function ItemModal(props) { //main function
     props.addItem(newItem);
     props.history.push(Paths.ITEM);
     handleClose(); //close modal
+    setValues('');
+    setSelectedFile('');
+    setMessage('');
  }
 
  //upload image section
@@ -141,7 +148,11 @@ function ItemModal(props) { //main function
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Add Employee</DialogTitle>
         <DialogContent>
-          <DialogContentText>Please enter your name and contact here. We will send updates.</DialogContentText>
+          {/* <DialogContentText>
+             Please enter your name and contact here. We will send updates.
+          </DialogContentText> */}
+          {message ? <Message msg={message} /> : null}
+          <br />
            {/* <FileUpload /> */}
            {/* <DropzoneAreaExample /> */}
            {
@@ -174,7 +185,7 @@ function ItemModal(props) { //main function
             id="name"
             label="LastName, FirstName"
             type="text"
-            value={values.name}
+            value={values.name || ''}
             onChange={handleChange('name')}
             fullWidth
             disabled={disableTxtField}
@@ -184,7 +195,7 @@ function ItemModal(props) { //main function
             id="contact"
             label="Contact no."
             type="number"
-            value={values.contact}
+            value={values.contact || ''}
             onChange={handleChange('contact')}
             fullWidth
             disabled={disableTxtField}

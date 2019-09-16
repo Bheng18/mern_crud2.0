@@ -14,6 +14,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
+import ConfirmDelete from './ConfirmDelete';
+
 // import { NavigationMoreVert, EditorModeEdit, ContentRemove } from 'material-ui/icons';
 // import { Divider } from '@material-ui/core';
 
@@ -125,7 +127,7 @@ const useStyles = makeStyles(theme => ({
                 {/* <MenuItem onClick={this.onEditClick.bind(this, item)}>Edit</MenuItem> */}
                 <MenuItem onClick={props.onEdit ? props.onEdit.bind(this) : ''}><EditIcon /> Edit</MenuItem>
                 <MenuItem onClick={props.onViewDetails ? props.onViewDetails.bind(this) : ''}><DetailsIcon /> Details</MenuItem>
-                <MenuItem onClick={props.onDelete ? props.onDelete.bind(this) : ''}><DeleteIcon /> Delete</MenuItem>
+                <MenuItem onClick={props.onDelete ? props.onDelete.bind(this) : ''}><DeleteIcon />Delete</MenuItem>
               </Menu>
             </Grid>
 
