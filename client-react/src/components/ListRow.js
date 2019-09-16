@@ -7,22 +7,33 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DetailsIcon from '@material-ui/icons/Details';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+//import EmployeeImages from './EmployeeImages';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardMedia from '@material-ui/core/CardMedia';
 // import { NavigationMoreVert, EditorModeEdit, ContentRemove } from 'material-ui/icons';
 // import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    "&:hover": {
-       cursor: 'pointer',
-    }
+    // "&:hover": {
+    //    cursor: 'pointer',
+    // }
   },
   paper: {
     padding: theme.spacing(2),
     // textAlign: 'center',
     color: theme.palette.text.secondary,
+  },
+  card: {
+    maxWidth: 80,
+  },
+  media: {
+    height: 80,
   },
   // list: {
   //   width: '100%',
@@ -47,22 +58,46 @@ const useStyles = makeStyles(theme => ({
   
   return (
     // onClick={props.onClick.bind(props)}
-    <div className={classes.root} onClick={props.onClick.bind(props)} >
+    <div className={classes.root} >
       <Grid container spacing={2}>
         <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <Grid item container direction="row" justify="flex-end" spacing={1}>
+          <Grid container direction="row" justify="flex-end" spacing={1}>
+
             <Grid item xs={12} sm={3}>
-            {/* <Divider /> */}
-              {props.index+1}
+            <Typography variant="caption" display="block">
+                Image:
+            </Typography>
+              { props.item && props.item.image ?
+                <Card className={classes.card}>
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.media}
+                      image={`/uploads/${props.item.image}`}
+                      title="Contemplative Reptile"
+                    />
+                  </CardActionArea>
+                </Card> 
+                : <Card className={classes.card}>
+                    <CardActionArea>
+                      <CardMedia
+                        className={classes.media}
+                        image={`/uploads/defaultAvatar.png`}
+                        title="Contemplative Reptile"
+                      />
+                    </CardActionArea>
+                  </Card>
+              }          
+               
             </Grid>
+
             <Grid item xs={12} sm={3}>
             {/* <Divider /> */}
             <Typography variant="caption" display="block">
                 name:
             </Typography>
             <Typography variant="button" gutterBottom>
-              <b>{props.item.name}</b>               
+              <b>{props.item ? props.item.name : ''}</b>               
             </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -70,9 +105,9 @@ const useStyles = makeStyles(theme => ({
               <Typography variant="caption" display="block">
                   contact:
               </Typography>
-              <b>{'(+' + props.item.contact.replace(/(\d{2})(\d{3})(\d{3})/, '$1) $2-$3-')}</b>
+              <b>{props.item ? '(+' + props.item.contact.replace(/(\d{2})(\d{3})(\d{3})/, '$1) $2-$3-') : ''}</b>
             </Grid>
-            <Grid item xs={12} sm={3} >
+            <Grid item container direction="row" justify="flex-end" alignItems="flex-start" xs={12} sm={3} >
               <IconButton
                 aria-controls="simple-menu"
                 aria-haspopup="true"
@@ -89,7 +124,7 @@ const useStyles = makeStyles(theme => ({
               >
                 {/* <MenuItem onClick={this.onEditClick.bind(this, item)}>Edit</MenuItem> */}
                 <MenuItem onClick={props.onEdit ? props.onEdit.bind(this) : ''}><EditIcon /> Edit</MenuItem>
-                {/* <MenuItem onClick={props.onViewDetails ? props.onViewDetails.bind(this) : ''}>Details</MenuItem> */}
+                <MenuItem onClick={props.onViewDetails ? props.onViewDetails.bind(this) : ''}><DetailsIcon /> Details</MenuItem>
                 <MenuItem onClick={props.onDelete ? props.onDelete.bind(this) : ''}><DeleteIcon /> Delete</MenuItem>
               </Menu>
             </Grid>

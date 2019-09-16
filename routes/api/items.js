@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 //@access Public
 router.post('/', (req, res) => {
     const newItem = new Item({
+      image: req.body.image,
       name: req.body.name,
       contact: req.body.contact 
     });

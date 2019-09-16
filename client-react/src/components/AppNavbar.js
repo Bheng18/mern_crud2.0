@@ -124,8 +124,12 @@ export default function AppNavbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} >
+        <Link href="https://jf-portfolio.netlify.com/#aboutMe" target="_blank" style={{ textDecoration: 'none' }} >About Me</Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link href="https://jf-portfolio.netlify.com/#portfolio" target="_blank" style={{ textDecoration: 'none' }} >Portfolio</Link>
+      </MenuItem>
     </Menu>
   );
 

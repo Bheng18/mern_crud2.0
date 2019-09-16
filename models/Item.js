@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 //Crate schema
 const ItemSchema = new Schema({
+    image: { type: String },
     name: {
         type: String,
         required: true

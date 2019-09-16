@@ -42,7 +42,7 @@ class ShoppingList extends Component{
      
     render(){
         const { items } = this.props.items;
-        // console.log(items)
+        console.log(items)
         return(
            <div >
              {/* <Contaciner> */}
@@ -54,14 +54,15 @@ class ShoppingList extends Component{
                   // items.length > 0 ?
                     items.map((item, index) => {
                       return (
-                        // <div key={index} onClick={() => this.onSelectItem(item)} > //its working
+                        // <div key={index} onClick={() => this.onSelectItem(item)} > 
                           <ListRow
-                            onClick={() => this.onSelectItem(item)}
+                            // onClick={() => this.onSelectItem(item)}
                             key={index}
                             index={index}
                             item={item}
                             onEdit={() => this.onEditClick(item)}
                             onDelete={() => this.onDeleteClick(item._id)}
+                            onViewDetails={() => this.onSelectItem(item)}
                           />
                         // </div>
                       )

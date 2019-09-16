@@ -16,7 +16,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Paths } from '../enums';
-// import ButtonBase from '@material-ui/core/ButtonBase';
+import ButtonBase from '@material-ui/core/ButtonBase';
 // import { NavigationMoreVert, EditorModeEdit, ContentRemove } from 'material-ui/icons';
 // import { Divider } from '@material-ui/core';
 
@@ -32,16 +32,16 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
   },
 
-  // image: {
-  //   width: 128,
-  //   height: 128,
-  // },
-  // img: {
-  //   margin: 'auto',
-  //   display: 'block',
-  //   maxWidth: '100%',
-  //   maxHeight: '100%',
-  // },
+  image: {
+    width: 128,
+    height: 128,
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
 }));
 
 const ListDetails = (props) => {
@@ -93,11 +93,16 @@ const ListDetails = (props) => {
        </Grid>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
-          {/* <Grid item>
+          <Grid item>
             <ButtonBase className={classes.image}>
-              <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" />
+              {
+                props.item && props.item.image ? 
+                <img className={classes.img} alt="complex" src={`/uploads/${props.item.image}`} /> 
+                : <img className={classes.img} alt="complex" src={`/uploads/defaultAvatar.png`} />
+              }
+              
             </ButtonBase>
-          </Grid> */}
+          </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
