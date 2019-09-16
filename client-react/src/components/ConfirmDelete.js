@@ -20,7 +20,7 @@ function ConfirmDelete(props) {
 //     setOpen(true);
 //   }
 
-  function handleClose() {
+  function handleClose() { 
     setOpen(false);
     props.history.push(Paths.ITEMS);
   }
