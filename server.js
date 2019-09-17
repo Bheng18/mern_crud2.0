@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
 const fileUpload = require('express-fileupload')
 
@@ -8,6 +9,7 @@ const items = require('./routes/api/items');
 // const profile = require('./routes/api/profile');
 
 const app = express();
+app.use(cors());
 
 //fileUpload
 app.use(fileUpload());
@@ -21,7 +23,7 @@ app.post('/api/uploads', (req, res) => {
    file.mv(`${__dirname}/client-react/public/uploads/${file.name}`, err => {
      if(err){
         console.log(err);
-        return res.status(500).send(err);
+        return res.status(500).send(err); 
      }
      res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
    });
