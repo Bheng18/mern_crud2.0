@@ -42,11 +42,11 @@ function ConfirmDelete(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Delete Confirmation"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Are you sure to delete <b>{ props.item ? props.item.name : '' }</b> ?</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-             Are you sure to delete { props.item ? props.item.name : '' } ?
-          </DialogContentText>
+          {/* <DialogContentText id="alert-dialog-description">
+              { props.item ? props.item.name : '' } ?
+          </DialogContentText> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
                     <CardMedia
                       className={classes.media}
                       image={`/uploads/${props.item.image}`}
-                      title="Contemplative Reptile"
+                      title={props.item ? props.item.name : ''}
                     />
                   </CardActionArea>
                 </Card> 
@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
                       <CardMedia
                         className={classes.media}
                         image={`/uploads/defaultAvatar.png`}
-                        title="Contemplative Reptile"
+                        title="Default Avatar"
                       />
                     </CardActionArea>
                   </Card>
@@ -125,9 +125,9 @@ const useStyles = makeStyles(theme => ({
                 onClose={handleClose}
               >
                 {/* <MenuItem onClick={this.onEditClick.bind(this, item)}>Edit</MenuItem> */}
-                <MenuItem onClick={props.onEdit ? props.onEdit.bind(this) : ''}><EditIcon /> Edit</MenuItem>
-                <MenuItem onClick={props.onViewDetails ? props.onViewDetails.bind(this) : ''}><DetailsIcon /> Details</MenuItem>
-                <MenuItem onClick={props.onDelete ? props.onDelete.bind(this) : ''}><DeleteIcon />Delete</MenuItem>
+                <MenuItem onClick={props.onEdit ? props.onEdit.bind(this) : ''}><EditIcon color="primary"/> Edit</MenuItem>
+                <MenuItem onClick={props.onViewDetails ? props.onViewDetails.bind(this) : ''}><DetailsIcon color="primary"/> Details</MenuItem>
+                <MenuItem onClick={props.onDelete ? props.onDelete.bind(this) : ''}><DeleteIcon color="primary"/>Delete</MenuItem>
               </Menu>
             </Grid>
 

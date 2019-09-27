@@ -68,10 +68,11 @@ const ListDetails = (props) => {
     // console.log('edit item:', item)
   }
 
-  function onDeleteClick(id){
-     props.deleteItem(id);
+  function onDeleteClick(item){
+     //props.deleteItem(id);
     // console.log('id', id)
-    props.history.push(Paths.ITEMS);
+    // props.history.push(Paths.ITEMS);
+    props.history.push(Paths.ITEM_CONFIRM);
   }
 
   function handleBackClick(){
@@ -107,17 +108,19 @@ const ListDetails = (props) => {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography variant="caption" display="block">Date:</Typography> 
-                <Typography variant="button" gutterBottom><b>{moment(props.item.date).format('MMM. DD, YYYY')}</b></Typography>
+                <Typography variant="button" gutterBottom><b>{ props.item ? moment(props.item.date).format('MMM. DD, YYYY') : ''}</b></Typography>
               </Grid>
 
               <Grid item xs>
                 <Typography variant="caption" display="block">name:</Typography> 
-                <Typography variant="button" gutterBottom><b>{props.item.name}</b></Typography>
+                <Typography variant="button" gutterBottom><b>{ props.item ? props.item.name : ''}</b></Typography>
               </Grid>
 
               <Grid item xs>
                 <Typography variant="caption" display="block">Contact:</Typography> 
-                <Typography variant="button" gutterBottom><b>{'(+' + props.item.contact.replace(/(\d{2})(\d{3})(\d{3})/, '$1) $2-$3-')}</b></Typography>
+                <Typography variant="button" gutterBottom>
+                  <b>{ props.item ? '(+' + props.item.contact.replace(/(\d{2})(\d{3})(\d{3})/, '$1) $2-$3-') : ''}</b>
+                </Typography> 
               </Grid>
               
               {/* <Grid item> 
@@ -142,7 +145,7 @@ const ListDetails = (props) => {
                 open={Boolean(anchorEl)}  
                 onClose={handleClose} 
               > 
-                <MenuItem onClick={() => onEditClick(props.item)} color="inherit" ><EditIcon color="primary"/> Edit</MenuItem>
+                <MenuItem onClick={() => onEditClick(props.item)} ><EditIcon color="primary"/> Edit</MenuItem>
                 <MenuItem onClick={() => onDeleteClick(props.item._id)} ><DeleteIcon color="primary"/> Delete</MenuItem>
               </Menu>
 

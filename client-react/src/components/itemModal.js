@@ -93,7 +93,7 @@ function ItemModal(props) { //main function
   function onSubmit(e){
     e.preventDefault();
     const newItem = {
-        image: selectedFile.name,
+        image: selectedFile ? selectedFile.name : '',
         name: values.name,
         contact: values.contact
     }
@@ -159,7 +159,7 @@ function ItemModal(props) { //main function
               selectedFile ? 
               <div>
                   {/* <h3>{uploadedFile.fileName}</h3> */}
-                  <img style={{width: '30%'}} src={preview} alt='' />
+                  <img style={{width: '30%'}} src={preview} alt={uploadedFile.fileName} />
               </div>
               : null
             }
@@ -174,7 +174,9 @@ function ItemModal(props) { //main function
               type="file"
             /> 
           <label htmlFor="outlined-button-file">
-            <Button variant="outlined" component="span" disabled={uploadBtn} className={classes.button} onClick={upload} >
+            <Button variant="outlined" component="span" 
+              disabled={uploadBtn} 
+              className={classes.button} onClick={upload} >
               {'Upload image'}
             </Button>
           </label>
@@ -188,7 +190,7 @@ function ItemModal(props) { //main function
             value={values.name || ''}
             onChange={handleChange('name')}
             fullWidth
-            disabled={disableTxtField}
+            // disabled={disableTxtField} //this is working just uncomment it
           />
           <TextField
             margin="dense"
@@ -198,7 +200,7 @@ function ItemModal(props) { //main function
             value={values.contact || ''}
             onChange={handleChange('contact')}
             fullWidth
-            disabled={disableTxtField}
+           // disabled={disableTxtField} //this is working just uncomment it
           />
         </DialogContent>
         <DialogActions>
