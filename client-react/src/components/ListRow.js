@@ -27,15 +27,15 @@ const useStyles = makeStyles(theme => ({
     // }
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     // textAlign: 'center',
     color: theme.palette.text.secondary,
   },
   card: {
-    maxWidth: 80,
+    maxWidth: 50,
   },
   media: {
-    height: 80,
+    height: 50,
   },
   // list: {
   //   width: '100%',
@@ -64,9 +64,8 @@ const useStyles = makeStyles(theme => ({
       <Grid container spacing={2}>
         <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <Grid container direction="row" justify="flex-end" spacing={1}>
-
-            <Grid item xs={12} sm={3}>
+          <Grid container direction="row" justify="flex-end" alignItems="flex-start" spacing={1} >
+            <Grid item xs={12} sm={2}>
             <Typography variant="caption" display="block">
                 Image:
             </Typography>
@@ -93,23 +92,34 @@ const useStyles = makeStyles(theme => ({
                
             </Grid>
 
-            <Grid item xs={12} sm={3}>
-            {/* <Divider /> */}
-            <Typography variant="caption" display="block">
-                name:
-            </Typography>
-            <Typography variant="button" gutterBottom>
-              <b>{props.item ? props.item.name : ''}</b>               
-            </Typography>
+            <Grid item xs={12} xs={3}>
+              {/* <Divider /> */}
+              <Typography variant="caption" display="block">
+                  Firstname:
+              </Typography>
+              <Typography variant="button" gutterBottom>
+                <b>{props.item ? props.item.firstName : ''}</b>               
+              </Typography>
             </Grid>
-            <Grid item xs={12} sm={3}>
+
+            <Grid item xs={12} xs={3}>
+              {/* <Divider /> */}
+              <Typography variant="caption" display="block">
+                  Lastname:
+              </Typography>
+              <Typography variant="button" gutterBottom>
+                <b>{props.item ? props.item.lastName : ''}</b>               
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12} xs={3}>
             {/* <Divider /> */}
               <Typography variant="caption" display="block">
                   contact:
               </Typography>
               <b>{props.item ? '(+' + props.item.contact.replace(/(\d{2})(\d{3})(\d{3})/, '$1) $2-$3-') : ''}</b>
             </Grid>
-            <Grid item container direction="row" justify="flex-end" alignItems="flex-start" xs={12} sm={3} >
+            <Grid item container direction="row" justify="flex-end" alignItems="flex-start" xs={12} xs={1}>
               <IconButton
                 aria-controls="simple-menu"
                 aria-haspopup="true"

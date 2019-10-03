@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -13,11 +14,29 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import { Paths } from '../enums';
 import { selectedItem, editItem } from '../actions/itemAction';
 
-function EditItem(props) {
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+  input: {
+    // display: 'none',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 250,
+  },
+}));
+
+function EditItem(props) { //main function
+
+  const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [values, setValues] = useState({
       _id: props.item._id,
-      name: props.item.name,
+      firstName: props.item.firstName,
+      lastName: props.item.lastName,
+      email: props.item.email,
       contact: String(props.item.contact),
   });
 
@@ -65,13 +84,37 @@ function EditItem(props) {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
-            label="LastName, FirstName"
+            id="fistName"
+            label="FirstName"
             type="text"
-            value={values.name}
-            onChange={handleChange('name')}
-            fullWidth
+            value={values.firstName}
+            onChange={handleChange('firstName')}
+            className={classes.textField}
+            // fullWidth
           />
+
+          <TextField
+            margin="dense"
+            id="lastName"
+            label="LastName"
+            type="text"
+            value={values.lastName}
+            onChange={handleChange('lastName')}
+            className={classes.textField}
+            // fullWidth
+          />
+
+          <TextField
+            margin="dense"
+            id="email"
+            label="Email"
+            type="email"
+            value={values.email}
+            onChange={handleChange('email')}
+            className={classes.textField}
+            // fullWidth
+          />
+
           <TextField
             margin="dense"
             id="contact"
@@ -79,7 +122,8 @@ function EditItem(props) {
             type="text"
             value={values.contact}
             onChange={handleChange('contact')}
-            fullWidth
+            className={classes.textField}
+            // fullWidth
           />
         </DialogContent>
         <DialogActions>

@@ -83,6 +83,7 @@ const ListDetails = (props) => {
 
   return (
     <div className={classes.root}><br />
+       Employee Details
        <Grid 
           container
           direction="row"
@@ -112,8 +113,18 @@ const ListDetails = (props) => {
               </Grid>
 
               <Grid item xs>
-                <Typography variant="caption" display="block">name:</Typography> 
-                <Typography variant="button" gutterBottom><b>{ props.item ? props.item.name : ''}</b></Typography>
+                <Typography variant="caption" display="block">Firstname:</Typography> 
+                <Typography variant="button" gutterBottom><b>{ props.item ? props.item.firstName : ''}</b></Typography>
+              </Grid>
+
+              <Grid item xs>
+                <Typography variant="caption" display="block">Lastname:</Typography> 
+                <Typography variant="button" gutterBottom><b>{ props.item ? props.item.lastName : ''}</b></Typography>
+              </Grid>
+
+              <Grid item xs>
+                <Typography variant="caption" display="block">Email:</Typography> 
+                <Typography variant="button" gutterBottom><b>{ props.item ? props.item.email : ''}</b></Typography>
               </Grid>
 
               <Grid item xs>

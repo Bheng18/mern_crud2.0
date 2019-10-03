@@ -28,13 +28,20 @@ const useStyles = makeStyles(theme => ({
   input: {
     // display: 'none',
   },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 250,
+  },
 }));
 
 function ItemModal(props) { //main function
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = useState({
-      name: '',
+      firstName: '',
+      lastName: '',
+      email: '',
       contact: '',
   });
   //upload image section
@@ -94,7 +101,9 @@ function ItemModal(props) { //main function
     e.preventDefault();
     const newItem = {
         image: selectedFile ? selectedFile.name : '',
-        name: values.name,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
         contact: values.contact
     }
     // upload();
@@ -161,7 +170,9 @@ function ItemModal(props) { //main function
                   {/* <h3>{uploadedFile.fileName}</h3> */}
                   <img style={{width: '30%'}} src={preview} alt={uploadedFile.fileName} />
               </div>
-              : null
+              : <div>
+                    <img style={{width: '20%'}} src={`/uploads/defaultAvatar.png`} alt={'default avatar'} />
+                </div>
             }
             <br />
             <input
@@ -183,23 +194,54 @@ function ItemModal(props) { //main function
 
           <TextField
             autoFocus
+            required
             margin="dense"
-            id="name"
-            label="LastName, FirstName"
+            id="firstName"
+            label="FirstName"
             type="text"
-            value={values.name || ''}
-            onChange={handleChange('name')}
-            fullWidth
+            value={values.firstName || ''}
+            onChange={handleChange('firstName')}
+            className={classes.textField}
+            // fullWidth
             // disabled={disableTxtField} //this is working just uncomment it
           />
+
           <TextField
+            required
+            margin="dense"
+            id="lastName"
+            label="LastName"
+            type="text"
+            value={values.lastName || ''}
+            onChange={handleChange('lastName')}
+            className={classes.textField}
+            // fullWidth
+            // disabled={disableTxtField} //this is working just uncomment it
+          />
+
+          <TextField
+            required
+            margin="dense"
+            id="email"
+            label="Email"
+            type="email"
+            value={values.email || ''}
+            onChange={handleChange('email')}
+            className={classes.textField}
+            // fullWidth
+            // disabled={disableTxtField} //this is working just uncomment it
+          />
+
+          <TextField
+            required
             margin="dense"
             id="contact"
             label="Contact no."
             type="number"
             value={values.contact || ''}
             onChange={handleChange('contact')}
-            fullWidth
+            className={classes.textField}
+            // fullWidth
            // disabled={disableTxtField} //this is working just uncomment it
           />
         </DialogContent>

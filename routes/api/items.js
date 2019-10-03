@@ -19,7 +19,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     const newItem = new Item({
       image: req.body.image,
-      name: req.body.name,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
       contact: req.body.contact 
     });
     newItem.save().then(item => res.json(item));         
@@ -38,7 +40,14 @@ router.delete('/:id', (req, res) => {
 //@desc   Update Item
 //@access Public
 router.put('/', (req, res) => {
-    Item.findOneAndUpdate({_id: req.body._id}, { $set: { name: req.body.name, contact: req.body.contact }}, {new: true}, (err, task) => {
+    Item.findOneAndUpdate({_id: req.body._id}, 
+                          { $set: { 
+                            firstName: req.body.firstName,
+                            lastName: req.body.lastName,
+                            email: req.body.email, 
+                            contact: req.body.contact 
+                            }
+                          }, {new: true}, (err, task) => {
       if (err)
         res.send(err);
       res.json(task);

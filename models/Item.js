@@ -4,9 +4,17 @@ const Schema = mongoose.Schema;
 //Crate schema
 const ItemSchema = new Schema({
     image: { type: String },
-    name: {
+    firstName: {
         type: String,
         required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+       type: String,
+       required: true
     },
     contact: {
         type: String,

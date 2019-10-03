@@ -41,13 +41,12 @@ class ShoppingList extends Component{
      
     render(){
         const { items } = this.props.items;
-        console.log(items)
+        // console.log(items)
         return(
            <div >
              {/* <Contaciner> */}
               {/* <ListRowHeader /> */}
-              <ItemModal />
-              
+                  Employee List<ItemModal /> 
               <div>
                 {
                   // items ?

@@ -45,7 +45,7 @@ mongoose.connect(process.env.MONGODB_URI || db, {
     auth: {
        user: "mern_Crud_User",
        password: "@Cy12345678"
-  }, useNewUrlParser: true })
+  }, useUnifiedTopology: true, useNewUrlParser: true })
         .then(() => console.log('MongoDb Connected'))
         .catch(err => console.log(err));
 
