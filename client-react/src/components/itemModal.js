@@ -15,6 +15,8 @@ import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { Paths } from '../enums';
 import { addItem } from '../actions/itemAction';
+import Grid from '@material-ui/core/Grid';
+// import { EmployeeListActions } from '../actions/itemAction';
 import Message from './Message';
 // import Snackbar from '@material-ui/core/Snackbar';
 
@@ -23,10 +25,11 @@ import Message from './Message';
 
 const useStyles = makeStyles(theme => ({
   button: {
+    //marginLeft: 0,
     margin: theme.spacing(1),
   },
   input: {
-    // display: 'none',
+    display: 'none',
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -42,6 +45,7 @@ function ItemModal(props) { //main function
       firstName: '',
       lastName: '',
       email: '',
+      password: '',
       contact: '',
   });
   //upload image section
@@ -54,7 +58,7 @@ function ItemModal(props) { //main function
   //_____________________________//  
 
   const [selectedFile, setSelectedFile] = useState();
-    const [preview, setPreview] = useState();
+    const [preview, setPreview] = useState('');
 
     // create a preview as a side effect, whenever selected file is changed
     useEffect(() => {
@@ -76,7 +80,8 @@ function ItemModal(props) { //main function
 
   function handleClose() {
     setOpen(false);
-    setPreview(undefined) // to remove preview image
+    setSelectedFile('');
+    // setPreview('') // to remove preview image
     setMessage(''); //set message to null
   }
 
@@ -104,6 +109,7 @@ function ItemModal(props) { //main function
         firstName: values.firstName,
         lastName: values.lastName,
         email: values.email,
+        password: values.password,
         contact: values.contact
     }
     // upload();
@@ -127,24 +133,29 @@ function ItemModal(props) { //main function
   const upload = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('file', selectedFile);
-
-    try{
-      const res = await axios.post('/api/uploads', formData, {
-        headers: {'Content-Type': 'multipart/form-data'}
-      });
-
-      const { fileName, filePath } = res.data;
-      setUploadFile({ fileName, filePath });
-      setMessage('File successfully uploaded!.');
-      setDisabledTxtField(false);
-    }catch(err){
-       if(err.response.status === 500){
-          setMessage('There was a problem in server');
-       }else{
-          setMessage(err.response.data.msg);
-       }
-    }
+     if(selectedFile){
+       formData.append('file', selectedFile);
+       try{
+        const res = await axios.post('/api/uploads', formData, {
+          headers: {'Content-Type': 'multipart/form-data'}
+        });
+  
+        const { fileName, filePath } = res.data;
+        setUploadFile({ fileName, filePath });
+        setMessage('File successfully uploaded!.');
+        setDisabledTxtField(false);
+      }catch(err){
+         if(err.response.status === 500){
+            setMessage('There was a problem in server');
+         }else{
+            setMessage(err.response.data.msg);
+         }
+      }
+     }else{   
+      setMessage('Please select profile picture. :)');     
+      setSelectedFile('');
+     }
+    
 
 }
 
@@ -152,7 +163,7 @@ function ItemModal(props) { //main function
     <div><br />
       <form noValidate autoComplete="off">
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-         <AddIcon /> Add Employee
+         <AddIcon /> Register
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Add Employee</DialogTitle>
@@ -166,31 +177,39 @@ function ItemModal(props) { //main function
            {/* <DropzoneAreaExample /> */}
            {
               selectedFile ? 
-              <div>
+              <Grid container direction="row" justify="center" alignItems="center">
                   {/* <h3>{uploadedFile.fileName}</h3> */}
-                  <img style={{width: '30%'}} src={preview} alt={uploadedFile.fileName} />
-              </div>
-              : <div>
-                    <img style={{width: '20%'}} src={`/uploads/defaultAvatar.png`} alt={'default avatar'} />
-                </div>
+                  <img style={{width: '100px', height: '100px'}} src={preview} alt={uploadedFile.fileName} />
+              </Grid>
+              : <Grid container direction="row" justify="center" alignItems="center">
+                    <img style={{width: '100px'}} src={`/uploads/defaultAvatar.png`} alt={'default avatar'} />
+                </Grid>
             }
-            <br />
-            <input
-              accept="image/*"
-              className={classes.input}
-              id="outlined-button-file"
-              // value={values.image}
-              // multiple
-              onChange={onSelectFile}
-              type="file"
-            /> 
-          <label htmlFor="outlined-button-file">
-            <Button variant="outlined" component="span" 
-              disabled={uploadBtn} 
-              className={classes.button} onClick={upload} >
-              {'Upload image'}
-            </Button>
-          </label>
+            {/* <br /> */}
+          <Grid container
+            direction="row"
+            justify="center"
+            alignItems="center">
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="outlined-button-file"
+                // value={values.image}
+                // multiple
+                onChange={onSelectFile}
+                type="file"
+              /> 
+              <label htmlFor="outlined-button-file" >
+                <Button variant="outlined" component="span" 
+                  // disabled={uploadBtn} 
+                  className={classes.button} >
+                  { selectedFile ? 'change image' : 'select image'}
+                </Button>
+              </label>
+              <label>
+                <Button variant="outlined" component="span" disabled={uploadBtn} onClick={upload} >Upload</Button>
+              </label>
+            </Grid>
 
           <TextField
             autoFocus
@@ -235,6 +254,19 @@ function ItemModal(props) { //main function
           <TextField
             required
             margin="dense"
+            id="password"
+            label="Password"
+            type="password"
+            value={values.password || ''}
+            onChange={handleChange('password')}
+            className={classes.textField}
+            // fullWidth
+            // disabled={disableTxtField} //this is working just uncomment it
+          />
+
+          <TextField
+            required
+            margin="dense"
             id="contact"
             label="Contact no."
             type="number"
@@ -260,3 +292,14 @@ const mapStateToProps = state => ({
  });
  
  export default connect(mapStateToProps, { addItem })(withRouter(ItemModal)); 
+
+   
+  //  export default connect(
+  //    state => ({
+  //      item: state.item
+  //    }),
+  //    dispatch => ({
+  //      addItem(){
+  //        dispatch(addItem(item));
+  //      },
+  //    }))(withRouter(ItemModal)); 

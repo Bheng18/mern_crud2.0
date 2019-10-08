@@ -14,7 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { Paths } from '../enums'
+import { Paths } from '../enums';
 import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({

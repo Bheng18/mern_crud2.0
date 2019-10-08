@@ -22,6 +22,7 @@ router.post('/', (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
+      password: req.body.password,
       contact: req.body.contact 
     });
     newItem.save().then(item => res.json(item));         
@@ -44,7 +45,7 @@ router.put('/', (req, res) => {
                           { $set: { 
                             firstName: req.body.firstName,
                             lastName: req.body.lastName,
-                            email: req.body.email, 
+                            email: req.body.email,
                             contact: req.body.contact 
                             }
                           }, {new: true}, (err, task) => {

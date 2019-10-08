@@ -22,14 +22,18 @@ import ConfirmDelete from './ConfirmDelete';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    // "&:hover": {
-    //    cursor: 'pointer',
-    // }
+    "&:hover": {
+      //  cursor: 'pointer',
+    }
   },
   paper: {
     padding: theme.spacing(1),
     // textAlign: 'center',
+    margin: 'auto',
     color: theme.palette.text.secondary,
+    "&:hover": {
+      backgroundColor: '#e3f2fd'
+    }
   },
   card: {
     maxWidth: 50,
@@ -37,6 +41,9 @@ const useStyles = makeStyles(theme => ({
   media: {
     height: 50,
   },
+  vertIcon: {
+    paddingTop: 50,
+  }
   // list: {
   //   width: '100%',
   //   maxWidth: 360,
@@ -64,35 +71,35 @@ const useStyles = makeStyles(theme => ({
       <Grid container spacing={2}>
         <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <Grid container direction="row" justify="flex-end" alignItems="flex-start" spacing={1} >
+          <Grid item container direction="row" spacing={1}  >
             <Grid item xs={12} sm={2}>
-            <Typography variant="caption" display="block">
-                Image:
-            </Typography>
-              { props.item && props.item.image ?
-                <Card className={classes.card}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.media}
-                      image={`/uploads/${props.item.image}`}
-                      title={props.item ? props.item.name : ''}
-                    />
-                  </CardActionArea>
-                </Card> 
-                : <Card className={classes.card}>
+              <Typography variant="caption" display="block">
+                  Image:
+              </Typography>
+                { props.item && props.item.image ?
+                  <Card className={classes.card}>
                     <CardActionArea>
                       <CardMedia
                         className={classes.media}
-                        image={`/uploads/defaultAvatar.png`}
-                        title="Default Avatar"
+                        image={`/uploads/${props.item.image}`}
+                        title={props.item ? props.item.name : ''}
                       />
                     </CardActionArea>
-                  </Card>
-              }          
-               
+                  </Card> 
+                  : <Card className={classes.card}>
+                      <CardActionArea>
+                        <CardMedia
+                          className={classes.media}
+                          image={`/uploads/defaultAvatar.png`}
+                          title="Default Avatar"
+                        />
+                      </CardActionArea>
+                    </Card>
+                }          
+                
             </Grid>
 
-            <Grid item xs={12} xs={3}>
+            <Grid item xs={12} sm={3}>
               {/* <Divider /> */}
               <Typography variant="caption" display="block">
                   Firstname:
@@ -102,7 +109,7 @@ const useStyles = makeStyles(theme => ({
               </Typography>
             </Grid>
 
-            <Grid item xs={12} xs={3}>
+            <Grid item xs={12} sm={3}>
               {/* <Divider /> */}
               <Typography variant="caption" display="block">
                   Lastname:
@@ -112,41 +119,43 @@ const useStyles = makeStyles(theme => ({
               </Typography>
             </Grid>
 
-            <Grid item xs={12} xs={3}>
+            <Grid item xs={12} sm={3}>
             {/* <Divider /> */}
               <Typography variant="caption" display="block">
                   contact:
               </Typography>
               <b>{props.item ? '(+' + props.item.contact.replace(/(\d{2})(\d{3})(\d{3})/, '$1) $2-$3-') : ''}</b>
             </Grid>
-            <Grid item container direction="row" justify="flex-end" alignItems="flex-start" xs={12} xs={1}>
-              <IconButton
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                 <MoreVertIcon/>
-              </IconButton>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                {/* <MenuItem onClick={this.onEditClick.bind(this, item)}>Edit</MenuItem> */}
-                <MenuItem onClick={props.onEdit ? props.onEdit.bind(this) : ''}><EditIcon color="primary"/> Edit</MenuItem>
-                <MenuItem onClick={props.onViewDetails ? props.onViewDetails.bind(this) : ''}><DetailsIcon color="primary"/> Details</MenuItem>
-                <MenuItem onClick={props.onDelete ? props.onDelete.bind(this) : ''}><DeleteIcon color="primary"/>Delete</MenuItem>
-              </Menu>
-            </Grid>
+                <Grid item xs={12} sm={1} >
+                {/* container direction="row" justify="flex-end" alignItems="flex-start"  */}
+                  <IconButton
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  >
+                    <MoreVertIcon/>
+                  </IconButton>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    {/* <MenuItem onClick={this.onEditClick.bind(this, item)}>Edit</MenuItem> */}
+                    <MenuItem onClick={props.onEdit ? props.onEdit.bind(this) : ''}><EditIcon color="primary"/> Edit</MenuItem>
+                    <MenuItem onClick={props.onViewDetails ? props.onViewDetails.bind(this) : ''}><DetailsIcon color="primary"/> Details</MenuItem>
+                    <MenuItem onClick={props.onDelete ? props.onDelete.bind(this) : ''}><DeleteIcon color="primary"/>Delete</MenuItem>
+                  </Menu>
+                </Grid>
 
           </Grid>
 
         </Paper> 
 
         </Grid>
-        {/* <Grid item xs={12} sm={6}>
+      {/*         
+        <Grid item xs={12} sm={6}>
           <Paper className={classes.paper}>xs=12 sm=6</Paper>
         <Grid item xs={6} sm={3}>
           <Paper className={classes.paper}>xs=6 sm=3</Paper>

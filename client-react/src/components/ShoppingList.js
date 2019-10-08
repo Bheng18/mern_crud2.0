@@ -5,6 +5,8 @@ import { PropTypes } from 'prop-types';
 import { Paths } from '../enums';
 import ListRow from './ListRow';
 import ItemModal from './itemModal';
+import TitleBar from '../common/TitleBar';
+import ListLoading from '../common/ListLoading';
 // import ListDetails from './ListDetails';
 // import ListRowHeader from './ListRowHeader';
 
@@ -44,13 +46,16 @@ class ShoppingList extends Component{
         // console.log(items)
         return(
            <div >
-             {/* <Contaciner> */}
-              {/* <ListRowHeader /> */}
-                  Employee List<ItemModal /> 
+              <TitleBar 
+                title={'List of Employee'}
+                // subTitle={'subTitle'}
+                buttons={[<ItemModal />]}
+              />
+                  {/* <ItemModal />  */}
               <div>
                 {
-                  // items ?
-                  // items.length > 0 ?
+                  items ?
+                  items.length > 0 ?
                     items.map((item, index) => {
                       return (
                         // <div key={index} onClick={() => this.onSelectItem(item)} > 
@@ -67,8 +72,8 @@ class ShoppingList extends Component{
                       )
                     })
                     // : console.log('no data')
-                    // : <ListLoading message={"No transactions found."} />
-                  // : <ListLoading />
+                    : <ListLoading message={"No transactions found."} />
+                  : <ListLoading />
                 }
               </div>
            </div>
