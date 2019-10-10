@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import AppNavbar from './components/AppNavbar';
+// import AppNavbar from './components/AppNavbar';
+import AppNavbar2 from './components/AppNavbar2';
 // import ShoppingList from './components/ShoppingList';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -37,7 +38,8 @@ class App extends Component {
       <Router>
         <Provider store={store}>
           <div className="App">
-            <AppNavbar />
+            {/* <AppNavbar /> */}
+              <AppNavbar2 />
               <Container>
                   <Switch> 
                     {/* <Route exact path="/itemList" component={ShoppingList} /> */}
@@ -46,6 +48,7 @@ class App extends Component {
                         path={Paths.ITEMS} 
                         component={lazyLoad(() =>
                           import("./components/ShoppingList")
+                          // import("./components/AppNavbar2")
                         )} 
                     />
                     <Route

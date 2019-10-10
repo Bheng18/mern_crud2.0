@@ -17,6 +17,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Paths } from '../enums';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import TitleBar from '../common/TitleBar';
 // import { NavigationMoreVert, EditorModeEdit, ContentRemove } from 'material-ui/icons';
 // import { Divider } from '@material-ui/core';
 
@@ -83,12 +84,19 @@ const ListDetails = (props) => {
 
   return (
     <div className={classes.root}><br />
-       Employee Details
+       {/* <TitleBar 
+          title={'Employee Details'}
+          // subTitle={'subTitle'}
+          // buttons={[<ItemModal />]}
+        /> */}
        <Grid 
           container
           direction="row"
-          justify="flex-end"
-          alignItems="flex-end" >
+          justify="space-between"
+          alignItems="flex-start" >
+          <Typography variant="h4" component="h2" >
+            Employee Details
+          </Typography>
           <Button variant="outlined" color="primary" onClick={handleBackClick} >
             <ArrowBackIcon /> Back
           </Button>
@@ -112,10 +120,10 @@ const ListDetails = (props) => {
                 <Typography variant="button" gutterBottom><b>{ props.item ? moment(props.item.date).format('MMM. DD, YYYY') : ''}</b></Typography>
               </Grid>
 
-              <Grid item xs>
+              <Grid item xs >
                 <Typography variant="caption" display="block">Firstname:</Typography> 
                 <Typography variant="button" gutterBottom><b>{ props.item ? props.item.firstName : ''}</b></Typography>
-              </Grid>
+                </Grid>
 
               <Grid item xs>
                 <Typography variant="caption" display="block">Lastname:</Typography> 

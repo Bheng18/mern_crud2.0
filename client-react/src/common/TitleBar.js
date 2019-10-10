@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
     root: {
-      flexGrow: 1,
+      // flexGrow: 1,
     },
     taas: {
-       height: 100
+       height: 50
     },
     displayStyle: {
         display: 'flex', 
@@ -16,24 +16,25 @@ const useStyles = makeStyles(theme => ({
         // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     },
     titleMarginStyle: {
-      margin: 15
+      margin: 0
     },
     titleStyle: {
        fontSize: 32, 
        color: theme.palette.text.secondary, 
        cursor: 'default'
     },
-    subTitleStyle: {
-      fontSize: 20, 
-      color: theme.palette.text.secondary, 
-      cursor: 'default'
-    },
+    // subTitleStyle: {
+    //   fontSize: 20, 
+    //   color: theme.palette.text.secondary, 
+    //   cursor: 'default'
+    // },
     mainBtnMargin: {
-        margin: 15, 
+        // margin: 10, 
+        marginTop: -15,
         display: 'flex'
     },
     btnMargin: {
-        marginLeft: 8 
+        marginLeft: 0 
     }
 
 }));

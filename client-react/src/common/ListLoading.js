@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	mainStyle: {
 		position: "relative",
-		backgroundColor: "#9e9e9e",
+		backgroundColor: "#f9fbe7",
 		height: 500,
 		// ...this.props.style
 	},
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 	messageStyle: {
 		fontSize: 16, 
 		fontWeight: 400, 
-		color: "#fafafa"
+		color: "#827717"
 	}
 }));
 
