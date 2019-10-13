@@ -53,15 +53,16 @@ function lazyLoad(loader) {
 }
 
 function Copyright() {
+  //color="textSecondary"
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+      <Typography variant="body2" align="center"> 
+        {'Copyright © '}
+        <Link color="inherit" href="https://jf-portfolio.netlify.com" target="_blank" >
+          <b>My Portfolio</b>
+        </Link>{' '}
+        {new Date().getFullYear()}
+        <b>{' by Joebert Fundador.'}</b>
+      </Typography>
   );
 }
 
@@ -182,6 +183,13 @@ inputInput: {
   },
 },
 
+footer: {
+  width: '100%', //theme.spacing(100),
+  paddingTop: '18px',
+  color: 'white',
+  height: 50,
+  backgroundColor: '#1a237e'
+}
 
 }));
 
@@ -315,7 +323,9 @@ export default function Dashboard() {
             </Grid>
           </Grid>
         </Container>
-        <Copyright />
+        <Paper className={classes.footer}>
+           <Copyright />
+         </Paper>
       </main>
       
     </div>
