@@ -28,6 +28,7 @@ import Loadable from "react-loadable";
 
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
 
 
 // import Chart from './Chart';
@@ -323,12 +324,13 @@ export default function Dashboard() {
             </Grid>
           </Grid>
         </Container>
-        <Paper className={classes.footer}>
-           <Copyright />
-         </Paper>
+        <BottomNavigation className={classes.footer}>
+            <Copyright />
+        </BottomNavigation>         
       </main>
-      
+    
     </div>
+
     </Provider>
   </Router>
   );
