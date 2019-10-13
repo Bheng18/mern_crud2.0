@@ -12,71 +12,42 @@ import Loadable from "react-loadable";
 //import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Dashboard from './components/Dashboard';
 
-function lazyLoad(loader) {
-  return Loadable({
-    loader,
-    loading: () => (
-      <div style={{ position: "relative", height: "100%", width: "100%" }}>
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            marginTop: 40 / -2,
-            marginLeft: 40 / -2
-          }}
-        />
-      </div>
-    )
-  });
-}
+// function lazyLoad(loader) {
+//   return Loadable({
+//     loader,
+//     loading: () => (
+//       <div style={{ position: "relative", height: "100%", width: "100%" }}>
+//         <div
+//           style={{
+//             position: "absolute",
+//             top: "50%",
+//             left: "50%",
+//             marginTop: 40 / -2,
+//             marginLeft: 40 / -2
+//           }}
+//         />
+//       </div>
+//     )
+//   });
+// }
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <Provider store={store}>
+      // <Router>
+      //   <Provider store={store}>
           <div className="App">
             {/* <AppNavbar /> */}
-              <AppNavbar2 />
-              <Container>
-                  <Switch> 
-                    {/* <Route exact path="/itemList" component={ShoppingList} /> */}
-                    <Route 
-                        exact 
-                        path={Paths.ITEMS} 
-                        component={lazyLoad(() =>
-                          import("./components/ShoppingList")
-                          // import("./components/AppNavbar2")
-                        )} 
-                    />
-                    <Route
-                        exact
-                        path={Paths.EDIT_ITEM}
-                        component={lazyLoad(() =>
-                          import("./components/editItem")
-                        )}
-                      />
-                    <Route 
-                        exact
-                        path={Paths.ITEM_DETAILS}
-                        component={lazyLoad(() =>
-                          import("./components/ListDetails")
-                        )}
-                    />
-                    <Route 
-                        exact
-                        path={Paths.ITEM_CONFIRM}
-                        component={lazyLoad(() =>
-                          import("./components/ConfirmDelete")
-                        )}
-                    />
-                  </Switch>  
-              </Container>
+              {/* <AppNavbar2 /> */}
+              <Dashboard />
+              {/* <Container> */}
+   
+              {/* </Container> */}
           </div>
-        </Provider>
-      </Router>
+      //   </Provider>
+      // </Router> 
     );
   }
 }
