@@ -85,6 +85,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: '#2c387e',
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -186,10 +187,12 @@ inputInput: {
 
 footer: {
   width: '100%', //theme.spacing(100),
-  paddingTop: '18px',
+  position: 'fixed',
+  bottom: 0,
+  paddingTop: '15px',
   color: 'white',
-  height: 50,
-  backgroundColor: '#1a237e'
+  // height: 40,
+  backgroundColor: '#2c387e'
 }
 
 }));
@@ -324,9 +327,9 @@ export default function Dashboard() {
             </Grid>
           </Grid>
         </Container>
-        <BottomNavigation className={classes.footer}>
-            <Copyright />
-        </BottomNavigation>         
+          <BottomNavigation className={classes.footer} >
+              <Copyright />
+          </BottomNavigation>         
       </main>
     
     </div>
