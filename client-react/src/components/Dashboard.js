@@ -329,7 +329,8 @@ export default function Dashboard() {
         </Container>
           <BottomNavigation className={classes.footer} >
               <Copyright />
-          </BottomNavigation>         
+          </BottomNavigation>       
+             
       </main>
     
     </div>
