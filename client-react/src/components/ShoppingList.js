@@ -58,7 +58,6 @@ class ShoppingList extends Component{
                   items.length > 0 ?
                     items.map((item, index) => {
                       return (
-                        // <div key={index} onClick={() => this.onSelectItem(item)} > 
                           <ListRow
                             // onClick={() => this.onSelectItem(item)}
                             key={index}
@@ -68,10 +67,8 @@ class ShoppingList extends Component{
                             onDelete={() => this.onDeleteClick(item)}
                             onViewDetails={() => this.onSelectItem(item)}
                           />
-                        // </div>
                       )
                     })
-                    // : console.log('no data')
                     : <ListLoading message={"No transactions found."} />
                   : <ListLoading />
                 }
