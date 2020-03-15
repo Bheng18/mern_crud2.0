@@ -71,7 +71,6 @@ class ShoppingList extends Component{
                         // </div>
                       )
                     })
-                    // : console.log('no data')
                     : <ListLoading message={"No transactions found."} />
                   : <ListLoading />
                 }
